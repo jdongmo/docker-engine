@@ -1,0 +1,16 @@
+---
+- name: Check machine bits
+  fail:
+    msg: "Please ensure your are running in a 64 bits and supported
+    distribution"
+  when: >
+    (ansible_facts.userspace_bits != "64") or (not (ansible_facts.distribution 
+    == "CentOS" or ansible_facts.distribution == "Debian" or 
+    ansible_facts.distribution == "Ubuntu" or ansible_facts.distribution == "Fedora"))
+
+- name: Distribution installation method
+  include: "{{ ansible_facts.distribution }}.yml"
+
+- name: Start and test docker engine
+  include: test.yml
+...

@@ -1,0 +1,26 @@
+---
+- name: Install docker python library
+  pip:
+    name: docker
+
+- name: Start docker engine service
+  service:
+    name: docker
+    state: started
+
+- name: Add docker group
+  group:
+    name: docker
+    state: present
+
+- name: Add users to docker group
+  user:
+    append: yes
+    groups: docker
+    name: "{{ docker_user }}"
+
+- name: test docker
+  shell: "newgrp - docker && docker run hello-world"
+  become: yes
+  become_user: "{{ docker_user }}" 
+...

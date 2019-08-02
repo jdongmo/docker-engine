@@ -1,0 +1,29 @@
+---
+- name: Remove old docker version
+  dnf:
+    name: 
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-selinux
+      - docker-engine-selinux
+      - docker-engine
+    state: absent
+
+- name: Add dnf plugin
+  dnf:
+    name: dnf-plugins-core
+    state: present
+
+- name: Add docker repository
+  command:  "dnf config-manager --add-repo {{ dockerce_repo_url }}"
+
+- name: Install docker engine
+  dnf:
+    name: "{{ rhel_dockerce_packages }}"
+    state: present
+...

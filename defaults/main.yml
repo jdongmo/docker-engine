@@ -1,0 +1,19 @@
+---
+apt_key_url: "https://download.docker.com/linux/{{ ansible_distribution
+| lower }}/gpg"
+apt_key_id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+arch: "amd64"
+dockerce_repo_url: "https://download.docker.com/linux/{{
+  ansible_facts.distribution | lower }}/docker-ce.repo"
+dockerce_version: "-19.03.1"
+apt_dockerce_packages:
+  - "docker-ce{{ dockerce_version | default('=*', true) }}"
+  - "docker-ce-cli{{ dockerce_version | default('=*', true) }}"
+  - containerd.io
+rhel_dockerce_packages:
+  - "docker-ce{{ dockerce_version | default('-*', true) }}"
+  - "docker-ce-cli{{ dockerce_version | default('-*', true) }}"
+  - containerd.io
+
+docker_user: "{{ ansible_user }}"
+...
