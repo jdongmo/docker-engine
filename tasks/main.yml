@@ -8,8 +8,18 @@
     == "CentOS" or ansible_facts.distribution == "Debian" or 
     ansible_facts.distribution == "Ubuntu" or ansible_facts.distribution == "Fedora"))
 
+- name: create docker home directory
+  file:
+    path: "{{ docker_home }}"
+    state: directory
+
 - name: Distribution installation method
   include: "{{ ansible_facts.distribution }}.yml"
+
+- name: Push configuration
+  template:
+    src: "daemon.json.j2"
+    dest: "/etc/docker/daemon.json"
 
 - name: Start and test docker engine
   include: test.yml

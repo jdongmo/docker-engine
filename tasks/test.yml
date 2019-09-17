@@ -7,6 +7,7 @@
   service:
     name: docker
     state: started
+    enabled: yes
 
 - name: Add docker group
   group:
@@ -19,8 +20,9 @@
     groups: docker
     name: "{{ docker_user }}"
 
-- name: test docker
-  shell: "newgrp - docker && docker run hello-world"
-  become: yes
-  become_user: "{{ docker_user }}" 
+##TODO: reboot host then check with docker ps command
+#- name: test docker
+#  shell: "newgrp - docker && docker run hello-world"
+#  become: yes
+#  become_user: "{{ docker_user }}" 
 ...

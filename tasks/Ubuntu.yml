@@ -21,7 +21,7 @@
     update_cache: yes
 
 - name: Get Docker GPG key
-  apt-key:
+  apt_key:
     id: "{{ apt_key_id }}"
     url: "{{ apt_key_url }}"
     state: present
