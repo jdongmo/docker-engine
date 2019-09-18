@@ -1,5 +1,5 @@
 ---
-apt_key_url: "https://download.docker.com/linux/{{ ansible_distribution
+apt_key_url: "https://download.docker.com/linux/{{ ansible_facts.distribution
 | lower }}/gpg"
 apt_key_id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
 arch: "amd64"
