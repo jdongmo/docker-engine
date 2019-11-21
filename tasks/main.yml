@@ -13,13 +13,18 @@
     path: "{{ docker_home }}"
     state: directory
 
+- name: create docker conf directory
+  file:
+    path: "{{ docker_conf }}"
+    state: directory
+
 - name: Distribution installation method
   include: "{{ ansible_facts.distribution }}.yml"
 
 - name: Push configuration
   template:
     src: "daemon.json.j2"
-    dest: "/etc/docker/daemon.json"
+    dest: "{{ docker_conf }}/daemon.json"
 
 - name: Start and test docker engine
   include: test.yml

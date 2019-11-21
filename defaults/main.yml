@@ -17,5 +17,6 @@ rhel_dockerce_packages:
 
 docker_user: "{{ ansible_user }}"
 docker_home: "/var/lib/docker"
+docker_conf: "/etc/docker"
 storage_driver: "overlay2"
 ...
